@@ -84,13 +84,11 @@ export default {
       this.successful = false;
       this.loading = true;
       this.$store.dispatch("auth/register", user).then(
-        () =>{
-          this.$router.push("/profile");
-        },
         (data) => {
           this.message = data.response;
           this.successful = true;
           this.loading = false;
+          this.$router.push("/profile");
         },
         (error) => {
           this.message =

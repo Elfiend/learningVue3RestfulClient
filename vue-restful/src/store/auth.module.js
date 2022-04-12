@@ -25,20 +25,61 @@ export const auth = {
     },
     register({ commit }, user) {
       return AuthService.register(user).then(
-        user => {
-          commit('loginSuccess', user);
-          return Promise.resolve(user);
-        },
         response => {
           commit('registerSuccess');
+          commit('loginSuccess', response.data);
+          if (response.data.auth_token) {
+            localStorage.setItem('user', JSON.stringify(response.data));
+          }    
           return Promise.resolve(response.data);
         },
         error => {
           commit('registerFailure');
           return Promise.reject(error);
+        },
+      );
+    },
+    resendEmail({ commit }) {
+      AuthService.resend_verification_email();
+    },
+    changepassword({ commit }, user) {
+      return AuthService.reset_password(user).then(
+        response => {
+          return Promise.resolve(response.data);
+        },
+        error => {
+          return Promise.reject(error);
         }
       );
-    }
+    },
+    changename({ commit }, user) {
+      console.log(user);
+      return AuthService.update_profile(user).then(
+        response => {
+          commit('changeName');
+          return Promise.resolve(response.data);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+    email_verification({commit}, data){
+      console.log('store : %o, ', data)
+      return AuthService.email_verfification(data).then(
+        response => {
+          commit('loginSuccess', response.data);
+          if (response.data.auth_token) {
+            localStorage.setItem('user', JSON.stringify(response.data));
+          }    
+          return Promise.resolve(response.data);      
+        },
+        error => {
+          commit('loginFailure');
+          return Promise.reject(error);
+        },
+     );
+    },
   },
   mutations: {
     loginSuccess(state, user) {
@@ -58,6 +99,9 @@ export const auth = {
     },
     registerFailure(state) {
       state.status.loggedIn = false;
-    }
+    },
+    changeName(state, user){
+      state.user = user;
+    },
   }
 };

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <HomeButton />
+    <ChangePasswordButton v-show="canChangePassword" />
     <LogoutButton v-show="loggedIn" />
     <LoginButton v-show="!loggedIn" />
     <SignupButton v-show="!loggedIn" />
@@ -7,32 +9,27 @@
 </template>
 
 <script>
+  import HomeButton from '@/components/HomeButton.vue';
   import LoginButton from '@/components/LoginButton.vue';
   import LogoutButton from '@/components/LogoutButton.vue';
   import SignupButton from '@/components/SignupButton.vue';
+  import ChangePasswordButton from './ChangePasswordButton.vue';
 
   export default {
     name: 'AuthenticationButton',
-    components: { LogoutButton, LoginButton, SignupButton },
+    components: { LogoutButton, LoginButton, SignupButton, ChangePasswordButton,HomeButton, },
     computed:{
-      currentUser() {
-        return this.$store.state.auth.user;
-      },
       loggedIn() {
         return this.$store.state.auth.status.loggedIn;
       },
-      isSocial(){
-        if (!currentUser) {
-          return false;
-        }
-        return currentUser.isSocial;
-      },
-      isEmailVerifided(){
-        if (!currentUser) {
-          return false;
-        }
-        return currentUser.isEmailVerifided;
-      },
+      canChangePassword(){
+        if (!this.loggedIn) return false;
+        this.currentUser = this.$store.state.auth.user;
+        if (!this.currentUser) return false;
+        if (this.currentUser.is_social_auth) return false;
+        if (!this.currentUser.email_confirmed) return false;
+        return true;
+      }
     }
   };
 </script>

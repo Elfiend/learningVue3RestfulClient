@@ -1,7 +1,7 @@
 <template>
-  <a class="nav-link" @click.prevent="logOut">
+  <button class="nav-link" @click.prevent="logOut">
     <font-awesome-icon icon="sign-out-alt" /> LogOut
-  </a>
+  </button>
 </template>
 
 <script>
@@ -9,8 +9,9 @@
     name: 'LogoutButton',
     methods: {
       logOut() {
-        this.$store.dispatch('auth/logout');
-        this.$router.push('/');
+        this.$store.dispatch('auth/logout').then(
+          ()=>{this.$router.push('/');}
+        );
       },
     },
   };

@@ -1,14 +1,11 @@
 class httpHeader{
 	authHeader() {
 		let user = JSON.parse(localStorage.getItem('user'));
-		if (user && user.accessToken) {
-		  return { Authorization: 'Bearer ' + user.accessToken };
+		if (user && user.auth_token) {
+		  return { Authorization: 'Token ' + user.auth_token };
 		} else {
 		  return {};
 		}
-	}
-	defaultHeader(){
-		return {'Access-Control-Allow-Origin':'http://localhost:3000'};
 	}
 }
 export default new httpHeader()
