@@ -17,6 +17,11 @@ const router = createRouter({
       component: LoginView
     },
     {
+      path: '/social',
+      name: 'SocialLogin',
+      component: () => import('../views/SocialLoginView.vue')
+    },
+    {
       path: '/register',
       name: 'Register',
       component: RegisterView
@@ -45,12 +50,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register', '/home',];
+  const publicPages = ['/login', '/register', '/home', '/social',];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
   // trying to access a restricted page + not logged in
   // redirect to login page
-  if (to.path.includes('api/auth/email_verification')){
+  if (to.path.includes('api/auth/email_verification')) {
     next();
     return;
   }
