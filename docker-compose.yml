@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  restclient:
+    image: restvue
+    container_name: pyexamClient
+    build:
+      context: ./vue-restful/
+      dockerfile: ./Dockerfile
+    ports:
+      - 11800:80
+    restart: unless-stopped
