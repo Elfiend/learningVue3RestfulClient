@@ -3,7 +3,7 @@ import httpHeader from './auth-header';
 axios.defaults.xsrfHeaderName = 'x-csrftoken'
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:8000/'
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 
 class AuthService {
 	register(user) {
