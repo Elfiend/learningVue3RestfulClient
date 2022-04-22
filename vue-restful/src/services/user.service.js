@@ -1,12 +1,13 @@
 import axios from 'axios';
-import authHeader from './auth-header';
-const API_URL = 'http://127.0.0.1:8000/api/test/';
+
+axios.defaults.xsrfHeaderName = 'x-csrftoken'
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
+
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + 'all');
-  }
-  getUserBoard() {
-    return axios.get(API_URL + 'user', { headers: authHeader() });
+  getUserList(data) {
+    return axios.get('api/users', { 'params': data });
   }
 }
 export default new UserService();

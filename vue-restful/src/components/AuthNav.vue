@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomeButton />
+    <ProfileButton v-show="loggedIn" />
     <ChangePasswordButton v-show="canChangePassword" />
     <LogoutButton v-show="loggedIn" />
     <LoginButton v-show="!loggedIn" />
@@ -14,10 +15,11 @@
   import LogoutButton from '@/components/LogoutButton.vue';
   import SignupButton from '@/components/SignupButton.vue';
   import ChangePasswordButton from './ChangePasswordButton.vue';
+  import ProfileButton from '@/components/ProfileButton.vue';
 
   export default {
     name: 'AuthenticationButton',
-    components: { LogoutButton, LoginButton, SignupButton, ChangePasswordButton,HomeButton, },
+    components: { LogoutButton, LoginButton, SignupButton, ChangePasswordButton,HomeButton, ProfileButton,},
     computed:{
       loggedIn() {
         return this.$store.state.auth.status.loggedIn;

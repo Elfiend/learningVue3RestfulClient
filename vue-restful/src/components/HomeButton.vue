@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/profile" class="nav-link">
+  <router-link to="/" class="nav-link">
     Home
   </router-link>
 </template>

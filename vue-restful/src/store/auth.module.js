@@ -1,4 +1,5 @@
 import AuthService from '../services/auth.service';
+import UserService from '../services/user.service';
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
   ? { status: { loggedIn: true }, user }
@@ -91,6 +92,17 @@ export const auth = {
           return Promise.reject(error);
         },
      );
+    },
+    get_user_list({commit}, data){
+      return UserService.getUserList(data).then(
+        response =>{
+          return Promise.resolve(response.data);
+        },
+        error =>{
+          console.log('store get_user_list error:%o',error);
+          return Promise.reject(error);
+        }
+      );
     },
   },
   mutations: {
