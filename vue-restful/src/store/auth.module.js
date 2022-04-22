@@ -104,6 +104,17 @@ export const auth = {
         }
       );
     },
+    get_user_statistics({commit}){
+      return UserService.getUserStatistics().then(
+        response =>{
+          return Promise.resolve(response.data);
+        },
+        error =>{
+          console.log('store get_user_statistics error:%o',error);
+          return Promise.reject(error);
+        }     
+      );
+    },
   },
   mutations: {
     loginSuccess(state, user) {

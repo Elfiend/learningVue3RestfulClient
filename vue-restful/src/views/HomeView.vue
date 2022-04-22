@@ -1,14 +1,15 @@
 <template>
   <main>
-    <h1>This is Homepage.</h1>
+    <UserStatistics />
     <UserList />
   </main>
 </template>
 
 <script>
 import UserList from "@/components/UserList.vue";
+import UserStatistics from "@/components/UserStatistics.vue";
 export default {
   name: "Homepage",
-  components: { UserList, },
+  components: { UserList, UserStatistics, },
 }
 </script>

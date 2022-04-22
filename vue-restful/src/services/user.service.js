@@ -9,5 +9,8 @@ class UserService {
   getUserList(data) {
     return axios.get('api/users', { 'params': data });
   }
+  getUserStatistics() {
+    return axios.get('api/users/get_statistics');
+  }
 }
 export default new UserService();
