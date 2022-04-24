@@ -20,7 +20,7 @@ class AuthService {
 				password: user.password,
 			})
 			.then(response => {
-				if (response.data.auth_token) {
+				if (response.data.token) {
 					localStorage.setItem('user', JSON.stringify(response.data));
 				}
 				return response.data;
@@ -33,7 +33,7 @@ class AuthService {
 			})
 			.then(response => {
 				console.log('social_login r :%o',response.data)
-				if (response.data.auth_token) {
+				if (response.data.token) {
 					localStorage.setItem('user', JSON.stringify(response.data));
 				}
 				return response.data;

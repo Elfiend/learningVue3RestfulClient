@@ -41,7 +41,7 @@ export const auth = {
         response => {
           commit('registerSuccess');
           commit('loginSuccess', response.data);
-          if (response.data.auth_token) {
+          if (response.data.token) {
             localStorage.setItem('user', JSON.stringify(response.data));
           }    
           return Promise.resolve(response.data);
@@ -82,7 +82,7 @@ export const auth = {
       return AuthService.email_verfification(data).then(
         response => {
           commit('loginSuccess', response.data);
-          if (response.data.auth_token) {
+          if (response.data.token) {
             localStorage.setItem('user', JSON.stringify(response.data));
           }    
           return Promise.resolve(response.data);      
