@@ -40,8 +40,12 @@ class AuthService {
 			});
 	}
 	logout() {
-		localStorage.removeItem('user');
-		return axios.post('api/auth/logout', {});
+		return axios.post('api/auth/logout',{
+		},{
+			headers:httpHeader.authHeader(),
+		}).then(
+			localStorage.removeItem('user')
+		);
 	}
 	resend_verification_email(){
 		return axios

@@ -13,9 +13,16 @@ export const useAuth0 = (state) => {
 		console.log('URL : %o', url)
 		window.location.href = url;
 	};
+	const logout = async()=>{
+		let url = `https://${config.domain}/v2/logout?`;
+		url += `&client_id=${config.client_id}`;
+		url += `&returnTo=${window.location.origin}`;
+		window.location.href = url;
+	};
 
 	return {
 		login,
+		logout,
 	}
 }
 
