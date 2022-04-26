@@ -22,7 +22,7 @@
           <td>{{ user.email }}</td>
           <td>{{ user.date_joined }}</td>
           <td>{{ user.login_count }}</td>
-          <td>{{ user.last_login }}</td>
+          <td>{{ user.last_modified }}</td>
         </tr>
       </tbody>
     </table>
@@ -40,7 +40,7 @@ export default {
         "email": "",
         "date_joined": "",
         "login_count": 0,
-        "last_login": null,
+        "last_modified": null,
       }],
     };
   },
