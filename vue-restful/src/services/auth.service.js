@@ -26,18 +26,31 @@ class AuthService {
 				return response.data;
 			});
 	}
-	social_login(user){
-		return axios.post('api/login/social/token_user/', {
+	social_login(user) {
+		return axios.post('api/login/social/token/', {
 			provider: user.provider,
-			code:user.code,
-			})
+			code: user.code,
+		})
 			.then(response => {
-				console.log('social_login r :%o',response.data)
+				console.log('social_login r :%o', response.data)
 				if (response.data.token) {
 					localStorage.setItem('user', JSON.stringify(response.data));
 				}
-				return response.data;
+				// return response.data;
+				return this.get_user_data();
 			});
+	}
+	get_user_data() {
+		return axios.post('api/users/get_detail', {
+		}, {
+			headers: httpHeader.authHeader(),
+		}).then(response => {
+			console.log('get_user_data r :%o', response.data)
+			if (response.data.token) {
+				localStorage.setItem('user', JSON.stringify(response.data));
+			}
+			return response.data;
+		});
 	}
 	logout() {
 		return axios.post('api/auth/logout',{
